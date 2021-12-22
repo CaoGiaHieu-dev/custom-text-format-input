@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'custom_input_format.dart';
+import 'package:inputformat/email_input_formatter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,9 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             TextFormField(
-              keyboardType: TextInputType.number,
               inputFormatters: [
-                CustomInputFormat(type: Type.cardNumberDate),
+                EmailInputFormatter(),
               ],
             )
           ],
