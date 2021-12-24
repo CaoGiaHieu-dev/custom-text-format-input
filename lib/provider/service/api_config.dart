@@ -5,7 +5,9 @@ class ApiConfig {
   ApiConfig({
     this.interceptor = const [],
     this.responseType = ResponseType.json,
-    this.customHeader,
+    this.customHeader = const {
+      'Content-Type': "application/x-www-form-urlencoded",
+    },
     this.baseUrl,
     this.sendTimeout = 2000,
     this.connectTimeout = 10000,
@@ -15,14 +17,14 @@ class ApiConfig {
 
   final List<Interceptor> interceptor;
   final ResponseType responseType;
-  final Map<String, String>? customHeader;
+  final Map<String, String> customHeader;
   final String? baseUrl;
   final int sendTimeout, connectTimeout, receiveTimeout;
   final bool cacheData;
   late final DioCacheManager? dioCacheManager;
   Dio createDio() {
     final dio = Dio();
-    customHeader?.addToHeader(dio);
+    customHeader.addToHeader(dio);
     dio.options.sendTimeout = sendTimeout;
     dio.options.connectTimeout = connectTimeout;
     dio.options.receiveTimeout = receiveTimeout;

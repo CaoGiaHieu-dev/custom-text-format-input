@@ -6,19 +6,13 @@ import 'package:inputformat/card_date_input_formatter.dart';
 import 'package:inputformat/card_number_input_formatter.dart';
 import 'package:inputformat/phone_input_fotmatter.dart';
 import 'package:inputformat/provider/service/api_config.dart';
-import 'package:inputformat/provider/service/api_service.dart';
 
 import 'provider/service/api_client.dart';
 
 void main() {
   ApiClient.init(
     ApiConfig(
-      baseUrl: 'https://jsonplaceholder.typicode.com/',
-      customHeader: {'Content-Type': "application/x-www-form-urlencoded"},
       cacheData: true,
-      interceptor: [
-        ApiService(),
-      ],
     ),
   );
   runApp(const MyApp());
@@ -26,6 +20,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -48,6 +43,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    ApiClient.dio.options.baseUrl = 'https://jsonplaceholder.typicode.com/';
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
